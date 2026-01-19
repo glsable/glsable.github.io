@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>行走旅行 - Walking Travel</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#2badee",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#101c22",
+                        "dark-glass": "rgba(28, 28, 30, 0.92)",
+                        "light-glass": "rgba(255, 255, 255, 0.85)",
+                        "charcoal": "#333333",
+                        "nav-gray": "#8E8E93",
+                        "hiking-green": "#f0f4f1",
+                    },
+                    fontFamily: {
+                        "sans": ["Plus Jakarta Sans", "Noto Sans SC", "system-ui", "sans-serif"],
+                        "display": ["Plus Jakarta Sans", "Noto Sans SC", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "1rem",
+                        "card": "1.25rem",
+                        "lg": "1.25rem",
+                        "xl": "1.25rem",
+                        "2xl": "1.25rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .no-scrollbar::-webkit-scrollbar { display: none; }
+            .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+            .safe-bottom { padding-bottom: calc(env(safe-area-inset-bottom) + 1rem); }
+            .safe-top { padding-top: env(safe-area-inset-top); }
+            
+            .map-mesh {
+                background-color: #f1f5f9;
+                background-image: 
+                    radial-gradient(#cbd5e1 0.5px, transparent 0.5px),
+                    linear-gradient(to right, #e2e8f0 1px, transparent 1px),
+                    linear-gradient(to bottom, #e2e8f0 1px, transparent 1px);
+                background-size: 20px 20px, 40px 40px, 40px 40px;
+            }
+            .route-path {
+                stroke-dasharray: 6 4;
+                stroke-linecap: round;
+            }
+            .glass-panel {
+                backdrop-filter: blur(20px) saturate(180%);
+                -webkit-backdrop-filter: blur(20px) saturate(180%);
+            }
+            .gps-path {
+                stroke-dasharray: 8;
+                stroke-linecap: round;
+            }
+            .map-bg {
+                background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuA4aTb8jaD7WhRgohe5I_f4vJWJRaVXr2FUBQ6SwwO0plPKNrxUTNiP3LrTBybKwjkb4ql6XX2ZproAbOn8QoCl-tlDwPTfANdtVem3PkQGsMFuUO2m1aarAlBjnCw1WsThO46nccPNu7ShUsjHpmcwhkFOkH2TWbIhbVwFXtfwlD0NS-S4nlvJbBVsCLqu4InR8H56FLiQ5Q4d3B4BRQncE0HGil-M_pPGJp2obMiLrs5UDHdRTu_xywZS6JGky4IbvKL1z0QebJnq");
+                background-size: cover;
+                background-position: center;
+            }
+
+            /* Shimmer Animation */
+            @keyframes shimmer {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+            }
+            .animate-shimmer {
+                background: linear-gradient(90deg, 
+                    rgba(226, 232, 240, 0) 0%, 
+                    rgba(226, 232, 240, 0.5) 50%, 
+                    rgba(226, 232, 240, 0) 100%);
+                background-size: 200% 100%;
+                animation: shimmer 1.5s infinite linear;
+            }
+            .dark .animate-shimmer {
+                background: linear-gradient(90deg, 
+                    rgba(30, 41, 59, 0) 0%, 
+                    rgba(51, 65, 85, 0.5) 50%, 
+                    rgba(30, 41, 59, 0) 100%);
+                background-size: 200% 100%;
+            }
+        }
+        body {
+            @apply bg-background-light dark:bg-background-dark text-[#0d171b] dark:text-slate-200 antialiased;
+            overflow: hidden;
+            font-family: 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif;
+            min-height: 100dvh;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .fill-1 {
+            font-variation-settings: 'FILL' 1;
+        }
+        @keyframes fadeInZoom {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .animate-draft-dialog {
+            animation: fadeInZoom 0.3s ease-out forwards;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^6.22.3"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "Walking Travel (行走旅行)",
+  "description": "A comprehensive travel recording app that tracks your journey routes, captures moments with photos and voice, and provides AI-powered trip summaries.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
